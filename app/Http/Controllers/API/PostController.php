@@ -76,7 +76,7 @@ class PostController extends Controller
         $rules = [
             "title"          => "required|string|max:255",
             "description"    => "required|string",
-            "image"          => "required|image|mimes:png,jpg,svg|max:2048",
+            "image"          => "nullable|image|mimes:png,jpg,svg|max:2048",
             "type"           => "required|in:1,2",
         ];
 
@@ -89,7 +89,7 @@ class PostController extends Controller
         }
 
         $data = [
-            'title'         => $request->title,
+            'title'         => $request->title ?? $post->title,
             'description'   => $request->description,
             'type'          => $request->type,
             'user_id'       => $request->user()->id,
